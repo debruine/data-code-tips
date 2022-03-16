@@ -1,0 +1,115 @@
+---
+title: "Tips for Sharing Data and Code"
+author: "Lisa DeBruine"
+date: "`r Sys.Date()`"
+bibliography: bib.bib
+nocite: '@*'
+link-citations: yes
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      collapsed: false
+    toc_depth: 3
+    number_sections: false
+    theme: 
+      version: 4
+      bootswatch: yeti
+---
+
+<style>
+
+.beginner, .intermediate, .advanced { 
+  font-variant: small-caps; 
+  font-weight: 800;
+}
+.beginner { color: #449654; }
+.intermediate { color: #357BB0; }
+.advanced { color: #6356A1; }
+
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+If you're sharing data or code with a paper, here are a few tips to make sure your resources are as useful as possible. People have variable experience with data and code sharing, so this document provides tips with different levels of complexity and links for further in-depth tutorials. Do as much as you have time and expertise for, and build on your skills in future projects.
+
+> Computational reproducibility leads to more transparent and accurate research. ... fear of a crisis and focus on perfection should not prevent curation that may be ‘good enough.’ [@sawchuk2021computational]
+
+
+## Data
+
+### Save it in an accessible format
+
+* Use tab-separated value (.tsv) or comma-separated value (.csv) files
+* Use UTF-8 (or UTF-16) encoding to avoid problems in an international context (e.g., so characters like ü or é aren't mangled) 
+
+Excel is less preferable because of the proprietary format and its tendency to mangle anything that resembles a date. SPSS and other proprietary formats are also not ideal, but data in a proprietary format is better than no data.
+
+### Include a codebook
+
+* <span class="beginner">Beginner</span>: include a text file with each column name and an explanation 
+* <span class="intermediate">Intermediate</span>: You can include a data dictionary with further info like data type (string, numeric) or possible ranges/values [@buchanan2021getting]
+* <span class="intermediate">Intermediate</span>: Use `faux::codebook()` to make a [machine-readable codebook](https://debruine.github.io/faux/articles/codebook.html) in PsychDS format
+* <span class="intermediate">Intermediate</span>: Use the R [codebook](https://rubenarslan.github.io/codebook/articles/codebook_tutorial.html) to include a report with detailed metadata [@horstmann2020generating]
+
+
+### Ethical Sharing
+
+* Check that you are not sharing any identifiable data (without clear consent), such as names, student ID numbers, postcodes, IP addresses, or uniquely identifying combinations of demographic variables.
+* Add a [license](https://www.ucl.ac.uk/library/research-support/research-data-management/licenses-data-sharing-creative-commons) so others know how they can use the data. he most common licenses for data are:
+    * CC-0: Waves all rights and releases work to public domain
+    * CC-BY: By Attribution, which permits sharing and reuse of the material, for any purpose, as long as the original authors are credited
+    * CC-BY-SA: By Attribution, with a Share-Alike clause which means that anyone sharing or modifying the original work must release it under the same license
+
+### Make it findable
+
+* Use a persistent archive to host your data, like the [OSF](https://osf.io), [figshare](https://figshare.com/), or [zenodo](https://zenodo.org/). These platforms are free and can give your data a DOI.
+* Include the citation info in a README
+* Remember to make the data accessible for reviewers before submission. The OSF allows you to create a blinded [review-only link](https://help.osf.io/hc/en-us/articles/360019930333-Create-a-View-only-Link-for-a-Project).
+* Make the data accessible to the public before publication.
+* Make sure the paper contains the correct links to the data before publication.
+
+## Sharing Code
+
+### Make it reproducible
+
+* Include all the external files (e.g., data files) needed to run it
+* Use relative paths so that it can run on any computer
+* Set a seed if your code uses simulations or random number generation
+
+### Make it clear
+
+* Include a README that explains how to run the code
+* Assume that the audience has varying technical expertise and doesn't necessarily know the conventions of the language you're using
+* Indicate which parts of your code produce any figure, table, or value in your manuscript
+    * <span class="beginner">Beginner</span>: include comments in your code like `# produces Figure 3.1`
+    * <span class="intermediate">Intermediate</span>: Use code the generate the text of the results section so you only have one thing to copy and paste into the manuscript
+    * <span class="advanced">Advanced</span>: Use code to generate the entire manuscript (e.g., using the [papaja](http://frederikaust.com/papaja_man/) package)
+
+### Indicate software versions
+
+* <span class="beginner">Beginner</span>: Include a text file with the info, e.g., devtools::session_info() in R, or requirements.txt in python
+* <span class="intermediate">Intermediate</span>: Or use dependency management, like [renv](https://rstudio.github.io/renv/articles/renv.html) or [packrat](https://rstudio.github.io/packrat/) in R
+* <span class="advanced">Advanced</span>: Or use containers like [Binder](https://mybinder.org/), [Docker](https://www.docker.com/) or [CodeOcean](https://codeocean.com/) for full reproducibility
+  
+### Confirm reproducibility
+
+* <span class="beginner">Beginner</span>: Access your shared materials from a new computer and run the code
+* <span class="intermediate">Intermediate</span>: Or ask a colleague to try running your code on their machine
+* <span class="intermediate">Intermediate</span>: Or set up more formal code review [@vable2021code] in your group
+* <span class="advanced">Advanced</span>: Or use a service like [CodeCheck](https://codecheck.org.uk/)
+
+NB: If your code takes a very long time to run, such as when you have extremely large datasets or are running simulations, you can include smaller test datasets or run a smaller number of replications and include code at the top of the script to toggle real and test data or low and high numbers of reps.
+
+Finally, [make your code findable](#make-it-findable) using the same tips from the data section above. [GitHub](https://github.com/) is a common place to share code, but doesn't create a DOI, so if you use github, consider archiving a snapshot of your repository on [zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). 
+  
+## Further Resources
+
+Thank to everyone who responded to my [tweet](https://twitter.com/LisaDeBruine/status/1504063177012695047) about this topic. Many of the tips and links are from their comments.
+
+* [Tools for Reproducible Research](https://kbroman.org/Tools4RR/) course by Karl Broman
+* [How to name a file: Interoperability considerations](http://handbook.datalad.org/en/latest/intro/filenaming.html)
+
+## References
