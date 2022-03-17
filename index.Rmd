@@ -5,7 +5,15 @@ date: "`r Sys.Date()`"
 bibliography: bib.bib
 nocite: '@*'
 link-citations: yes
+geometry: margin=1in
+linkcolor: blue
+urlcolor: blue
+citecolor: blue
 output: 
+  bookdown::pdf_document2:
+    toc: true
+    toc_depth: 3
+    number_sections: false
   bookdown::html_document2:
     toc: true
     toc_float:
@@ -16,6 +24,8 @@ output:
       version: 4
       bootswatch: yeti
 ---
+
+\newpage
 
 <style>
 
@@ -59,7 +69,7 @@ Excel is less preferable because of the proprietary format and its tendency to m
 
 * Check that you are not sharing any identifiable data (without clear consent), such as names, student ID numbers, postcodes, IP addresses, or uniquely identifying combinations of demographic variables.
 * Add a [license](https://www.ucl.ac.uk/library/research-support/research-data-management/licenses-data-sharing-creative-commons) so others know how they can use the data. he most common licenses for data are:
-    * CC-0: Waves all rights and releases work to public domain
+    * CC-0: Waives all rights and releases work to public domain
     * CC-BY: By Attribution, which permits sharing and reuse of the material, for any purpose, as long as the original authors are credited
     * CC-BY-SA: By Attribution, with a Share-Alike clause which means that anyone sharing or modifying the original work must release it under the same license
 
@@ -111,5 +121,7 @@ Thank to everyone who responded to my [tweet](https://twitter.com/LisaDeBruine/s
 
 * [Tools for Reproducible Research](https://kbroman.org/Tools4RR/) course by Karl Broman
 * [How to name a file: Interoperability considerations](http://handbook.datalad.org/en/latest/intro/filenaming.html)
+
+\newpage
 
 ## References
